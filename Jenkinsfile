@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Sonar'){
             steps{
-                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=NewSpringMvcRest -Dsonar.sources=. -Dsonar.host.url=http://192.168.1.89:9001 -Dsonar.login=2OzGMwoHURHKY11PK2frxk1eyJN_7buaqW15cwwfb3KWR8xFP'
+                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=NewSpringMvcRest -Dsonar.sources=. -Dsonar.host.url=http://192.168.1.89:9001 -Dsonar.login=squ_7dbd979576414da98dee7a51c762fe9d8c1091f8'
             }
         }
         stage('Build') {
