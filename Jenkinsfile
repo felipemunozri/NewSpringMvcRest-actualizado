@@ -36,7 +36,7 @@ pipeline {
                             groupId: pom.groupId,
                             version: pom.version,
                             repository: "NewSpringMvcRest-artefactos",
-                            credentialsId: "198978d2-4d1d-4477-b503-02617c3bebcf",
+                            credentialsId: "df3e1d58-db3d-449f-bb6f-9a64000f3542",
                             artifacts: [
                                 [artifactId: pom.artifactId,
                                         classifier: '',
