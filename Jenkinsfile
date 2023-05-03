@@ -6,6 +6,11 @@ pipeline {
                 echo "Esta es el inicio"
             }
         }
+        stage('Sonar'){
+            steps{
+                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=NewSpringMvcRest -Dsonar.sources=. -Dsonar.host.url=http://192.168.1.89:9001 -Dsonar.login=2OzGMwoHURHKY11PK2frxk1eyJN_7buaqW15cwwfb3KWR8xFP'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B package'
