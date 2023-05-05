@@ -1,6 +1,6 @@
 pipeline {
     agent any
-        stages {
+    stages {
         stage('Initialize'){
             steps{
                 echo "Esta es el inicio"
@@ -25,7 +25,7 @@ pipeline {
             
         stage('Test') {
             steps {
-                 sh "mvn clean verify" 
+                sh "mvn clean verify" 
             
             }
         } 
@@ -59,7 +59,14 @@ pipeline {
                     }
                 }
             }
-        
-            } 
-     }
+        }
+        post {
+            success {
+                slackSend "Proyecto construido correctamente - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+            failure {
+                slackSend failOnError:true message:"Proyecto falló la construcción  - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+        } 
+    }
 }
