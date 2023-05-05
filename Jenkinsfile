@@ -62,7 +62,7 @@ pipeline {
         }
     }
     post {
-        build start {
+        always {
             slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Inició la construcción', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
         }
         aborted {
@@ -71,7 +71,7 @@ pipeline {
         failure {
             slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Falló la construcción', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
         }
-        not build {
+        unsuccessful {
             slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Construcción no se efectuño', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
         }
         success {
@@ -83,7 +83,7 @@ pipeline {
         regression {
             slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Regresión', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
         }
-        back to normal {
+        fixed {
             slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Construcción estable nuevamente', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
         }
     } 
