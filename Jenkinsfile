@@ -95,29 +95,3 @@ pipeline {
         }
     } 
 }
-
-def slackSend(def opts) {
-    def color = opts.color ?: '#36a64f'
-    def message = opts.message ?: ''
-    def slackToken = env.SLACK_TOKEN ?: ''
-    def slackChannel = env.SLACK_CHANNEL ?: ''
-    if (slackToken == '') {
-        echo 'No Slack token found.'
-        return
-    }
-    if (slackChannel == '') {
-        echo 'No Slack channel found.'
-        return
-    }
-    sh """
-        curl -X POST \
-        --data-urlencode 'payload={
-            \"channel\": \"${slackChannel}\",
-            \"attachments\": [{
-                \"color\": \"${color}\",
-                \"text\": \"${message}\"
-            }]
-        }' \
-        https://hooks.slack.com/services/${slackToken}
-    """
-}
