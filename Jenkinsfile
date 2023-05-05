@@ -19,14 +19,31 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -B package'
-            
+            }
+            post {
+                success {
+                    slackSend color: '#36a64f', message: 'Build succeeded!'
+                }
+                failure {
+                    slackSend color: '#ff0000', message: 'Build failed :('
+                }
+                unstable {
+                    slackSend color: '#f4b942', message: 'Build unstable :/'
+                }
+                aborted {
+                    slackSend color: '#c9c9c9', message: 'Build aborted.'
+                }
             }
         }
             
         stage('Test') {
             steps {
                 sh "mvn clean verify" 
-            
+            }
+            post {
+                always {
+                    slackSend color: '#439FE0', message: 'Tests complete.'
+                }
             }
         } 
         stage("Publish to Nexus Repository Manager") {
@@ -59,32 +76,22 @@ pipeline {
                     }
                 }
             }
+            post {
+                success {
+                    slackSend color: '#36a64f', message: 'Deployment to Nexus succeeded!'
+                }
+                failure {
+                    slackSend color: '#ff0000', message: 'Deployment to Nexus failed :('
+                }
+            }
         }
     }
     post {
-        always {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Inició la construcción', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
-        }
-        aborted {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Construcción abortada', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
+        success {
+            slackSend color: '#36a64f', message: 'Job complete.'
         }
         failure {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Falló la construcción', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
-        }
-        unsuccessful {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Construcción no se efectuño', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
-        }
-        success {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Construcción correcta', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
-        }
-        unstable {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Construcción inestable', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
-        }
-        regression {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Regresión', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
-        }
-        fixed {
-            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'Construcción estable nuevamente', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
+            slackSend color: '#ff0000', message: 'Job failed :('
         }
     } 
 }
