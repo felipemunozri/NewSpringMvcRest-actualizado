@@ -1,5 +1,19 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good',
+    'FAILURE': 'danger'
+]
+
+def getBuildUser {
+    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+}
+
 pipeline {
     agent any
+
+    environment {
+        BUILD_USER = ''
+    }
+
     stages {
         stage('Initialize'){
             steps{
@@ -20,30 +34,11 @@ pipeline {
             steps {
                 sh 'mvn -B package'
             }
-            post {
-                success {
-                    slackSend color: '#36a64f', message: 'Build succeeded!'
-                }
-                failure {
-                    slackSend color: '#ff0000', message: 'Build failed :('
-                }
-                unstable {
-                    slackSend color: '#f4b942', message: 'Build unstable :/'
-                }
-                aborted {
-                    slackSend color: '#c9c9c9', message: 'Build aborted.'
-                }
-            }
         }
             
         stage('Test') {
             steps {
                 sh "mvn clean verify" 
-            }
-            post {
-                always {
-                    slackSend color: '#439FE0', message: 'Tests complete.'
-                }
             }
         } 
         stage("Publish to Nexus Repository Manager") {
@@ -76,22 +71,17 @@ pipeline {
                     }
                 }
             }
-            post {
-                success {
-                    slackSend color: '#36a64f', message: 'Deployment to Nexus succeeded!'
-                }
-                failure {
-                    slackSend color: '#ff0000', message: 'Deployment to Nexus failed :('
-                }
-            }
         }
     }
     post {
-        success {
-            slackSend color: '#36a64f', message: 'Job complete.'
-        }
-        failure {
-            slackSend color: '#ff0000', message: 'Job failed :('
+        always {
+            script {
+                BUILD_USER = getBuildUser()
+            }
+
+            slackSend channel: 'fundamentos-de-devops',
+                      color: COLOR_MAP[currentBuild.currentResult],
+                      message: "$*{currentBuild.currentResult}:* ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER} \n More info at: ${env.BUILD_URL}" 
         }
     } 
 }
