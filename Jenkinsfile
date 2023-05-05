@@ -65,7 +65,7 @@ pipeline {
                 slackSend "Proyecto construido correctamente - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
             }
             failure {
-                slackSend failOnError:true message:"Proyecto falló la construcción  - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                slackSend failOnError:true, message:"Proyecto falló la construcción  - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
             }
         } 
     }
