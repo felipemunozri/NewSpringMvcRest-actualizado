@@ -62,11 +62,8 @@ pipeline {
         }
     }
     post {
-        success {
-            slackSend "Proyecto construido correctamente + ${env.JOB_NAME} + ${env.BUILD_NUMBER} + (<${env.BUILD_URL}|Open>)"
-        }
-        failure {
-            slackSend failOnError:true, message:"Proyecto falló la construcción + ${env.JOB_NAME} + ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        always {
+            slackSend channel: 'fundamentos-de-devops', color: 'good', message: 'PRUEBA CONEXION', teamDomain: 'curso-devopsgrupo', tokenCredentialId: 'slack-jenkins'
         }
     } 
 }
