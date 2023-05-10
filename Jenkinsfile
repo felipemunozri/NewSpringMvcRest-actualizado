@@ -24,7 +24,7 @@ pipeline {
             steps{
                 sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner \
                 -Dsonar.projectKey=NewSpringMvcRest \
-                -Dsonar.java.binaries=. \
+                -Dsonar.java.binaries=target/classes/ \
                 -Dsonar.sources=. \
                 -Dsonar.host.url=http://192.168.1.89:9001 \
                 -Dsonar.login=squ_7dbd979576414da98dee7a51c762fe9d8c1091f8'
@@ -86,7 +86,7 @@ pipeline {
         failure {
             slackSend channel: 'modulo3actividadgrupal',
                       color: COLOR_MAP[currentBuild.currentResult],
-                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}" 
+                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
         }
     } 
 }
