@@ -74,19 +74,19 @@ pipeline {
         }
     }
     post {
-        //always {
-        //    script {
-        //        BUILD_USER = getBuildUser()
-        //    }
+        always {
+            script {
+                BUILD_USER = getBuildUser()
+            }
 
-        //    slackSend channel: 'modulo3actividadgrupal',
-        //              color: COLOR_MAP[currentBuild.currentResult],
-        //              message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} by ${BUILD_USER} \n More info at: ${env.BUILD_URL}" 
-        //}
-        failure {
             slackSend channel: 'modulo3actividadgrupal',
                       color: COLOR_MAP[currentBuild.currentResult],
-                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
+                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} by ${BUILD_USER} \n More info at: ${env.BUILD_URL}" 
         }
+        //failure {
+        //    slackSend channel: 'modulo3actividadgrupal',
+        //              color: COLOR_MAP[currentBuild.currentResult],
+        //              message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
+        //}
     } 
 }
