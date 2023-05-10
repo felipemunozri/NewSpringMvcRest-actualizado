@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn -B package'
+                sh 'mvn- -B package'
             }
         }
             
@@ -83,7 +83,7 @@ pipeline {
         //              color: COLOR_MAP[currentBuild.currentResult],
         //              message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} by ${BUILD_USER} \n More info at: ${env.BUILD_URL}" 
         //}
-        always {
+        failure {
             slackSend channel: 'modulo3actividadgrupal',
                       color: COLOR_MAP[currentBuild.currentResult],
                       message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}" 
