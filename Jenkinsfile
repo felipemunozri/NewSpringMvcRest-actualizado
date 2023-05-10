@@ -1,8 +1,6 @@
 def COLOR_MAP = [
     'SUCCESS': 'good',
     'FAILURE': 'danger'
-    
-    
 ]
 
 def getBuildUser() {
@@ -22,27 +20,27 @@ pipeline {
                 echo "Esta es el inicio"
             }
         }
-        // stage('Sonar'){
-        //    steps{
-        //        sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner \
-        //        -Dsonar.projectKey=NewSpringMvcRest \
-        //        -Dsonar.java.binaries=. \
-        //        -Dsonar.sources=. \
-        //        -Dsonar.host.url=http://192.168.1.89:9001 \
-        //        -Dsonar.login=squ_7dbd979576414da98dee7a51c762fe9d8c1091f8'
-        //    }
-        //}
-        //stage('Build') {
-        //    steps {
-        //        sh 'mvn -B package'
-        //    }
-        //}
+        stage('Sonar'){
+            steps{
+                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner \
+                -Dsonar.projectKey=NewSpringMvcRest \
+                -Dsonar.java.binaries=. \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://192.168.1.89:9001 \
+                -Dsonar.login=squ_7dbd979576414da98dee7a51c762fe9d8c1091f8'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn -B package'
+            }
+        }
             
-        //stage('Test') {
-        //    steps {
-        //        sh "mvn clean verify" 
-        //    }
-        //} 
+        stage('Test') {
+            steps {
+                sh "mvn clean verify" 
+            }
+        } 
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
