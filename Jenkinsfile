@@ -1,7 +1,6 @@
 def COLOR_MAP = [
     'SUCCESS': 'good',
     'FAILURE': 'danger'
-    
 ]
 
 def getBuildUser() {
@@ -33,7 +32,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn- -B package'
+                sh 'mvn -B package'
             }
         }
             
