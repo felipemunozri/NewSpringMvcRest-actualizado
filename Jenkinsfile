@@ -74,7 +74,7 @@ pipeline {
         }
     }
     post {
-        always {
+        failure {
             script {
                 BUILD_USER = getBuildUser()
             }
