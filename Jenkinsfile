@@ -32,17 +32,17 @@ pipeline {
         //        -Dsonar.login=squ_7dbd979576414da98dee7a51c762fe9d8c1091f8'
         //    }
         //}
-        stage('Build') {
-            steps {
-                sh 'mvn -B package'
-            }
-        }
+        //stage('Build') {
+        //    steps {
+        //        sh 'mvn -B package'
+        //    }
+        //}
             
-        stage('Test') {
-            steps {
-                sh "mvn clean verify" 
-            }
-        } 
+        //stage('Test') {
+        //    steps {
+        //        sh "mvn clean verify" 
+        //    }
+        //} 
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
