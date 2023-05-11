@@ -25,8 +25,8 @@ pipeline {
                 sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner \
                 -Dsonar.projectKey=NewSpringMvcRest \
                 -Dsonar.java.binaries=target/classes/ \
-                -Dsonar.java.libraries=target
-                -Dsonar.scm.provider=git
+                -Dsonar.java.libraries=target/ \
+                -Dsonar.scm.provider=git \
                 -Dsonar.sources=. \
                 -Dsonar.host.url=http://192.168.1.89:9001 \
                 -Dsonar.login=squ_7dbd979576414da98dee7a51c762fe9d8c1091f8'
