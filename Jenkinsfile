@@ -28,7 +28,7 @@ pipeline {
                 -Dsonar.java.libraries=target/ \
                 -Dsonar.sources=. \
                 -Dsonar.host.url=http://192.168.1.89:9001 \
-                -Dsonar.login=squ_87b3b6925789307ef81bcf08b9d4ecaf786be538'
+                -Dsonar.login=squ_23c2bafb72a6bde5420e665cfee56af8f8369657'
             }
         }
         stage('Build') {
