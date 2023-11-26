@@ -28,7 +28,7 @@ pipeline {
                 -Dsonar.java.libraries=target/ \
                 -Dsonar.sources=. \
                 -Dsonar.host.url=http://192.168.1.89:9001 \
-                -Dsonar.login=squ_23c2bafb72a6bde5420e665cfee56af8f8369657'
+                -Dsonar.login=squ_26dd8ea99d400a3d578ba95ceef98d86edc2f822'
             }
         }
         stage('Build') {
@@ -80,9 +80,9 @@ pipeline {
         //        BUILD_USER = getBuildUser()
         //    }
 
-            slackSend channel: 'modulo3actividadgrupal',
-                      color: COLOR_MAP[currentBuild.currentResult],
-                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
+            //slackSend channel: 'modulo3actividadgrupal',
+            //          color: COLOR_MAP[currentBuild.currentResult],
+            //          message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
         }
         //failure {
         //    slackSend channel: 'modulo3actividadgrupal',
