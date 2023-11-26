@@ -74,20 +74,20 @@ pipeline {
             }
         }
     }
-    //post {
-    //    always {
+    post {
+        always {
         //    script {
         //        BUILD_USER = getBuildUser()
         //    }
 
-            //slackSend channel: 'modulo3actividadgrupal',
-            //          color: COLOR_MAP[currentBuild.currentResult],
-            //          message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
-    //    }
+            slackSend channel: 'modulo3actividadgrupal',
+                      color: COLOR_MAP[currentBuild.currentResult],
+                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
+        }
         //failure {
         //    slackSend channel: 'modulo3actividadgrupal',
         //              color: COLOR_MAP[currentBuild.currentResult],
         //              message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build #${env.BUILD_NUMBER} \n Más información en: ${env.BUILD_URL}" 
         //}
-    //} 
+    } 
 }
